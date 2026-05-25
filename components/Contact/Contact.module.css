@@ -98,7 +98,7 @@
   border-radius: 2px;
   letter-spacing: 0.04em;
   background: var(--light-surface);
-  transition: all 0.3s;
+  transition: color 0.3s, border-color 0.3s, background 0.3s;
 }
 
 .link:hover {

@@ -15,7 +15,7 @@ export default function Nav() {
   }, [])
 
   return (
-    <nav ref={navRef} className={styles.nav}>
+    <nav ref={navRef} className={styles.nav} aria-label="Main navigation">
       <a href="#hero" className={styles.logo}>D. Mauza</a>
       <div className={styles.navRight}>
         <ul className={styles.navLinks}>

@@ -14,12 +14,14 @@ export default function ProjectModal({ project, onClose }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const onCloseRef = useRef(onClose)
   onCloseRef.current = onClose
+  const closeBtnRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     if (!project) return
 
     document.body.style.overflow = 'hidden'
     const enterTimer = setTimeout(() => setIsOpen(true), 10)
+    closeBtnRef.current?.focus()
 
     function handleKey(e: KeyboardEvent) {
       if (e.key === 'Escape') {
@@ -36,6 +38,7 @@ export default function ProjectModal({ project, onClose }: Props) {
     return () => {
       clearTimeout(enterTimer)
       window.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = ''
     }
   }, [project])
 
@@ -52,14 +55,17 @@ export default function ProjectModal({ project, onClose }: Props) {
   return (
     <div className={styles.overlay} onClick={handleClose}>
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
         className={`${styles.panel} ${isOpen ? styles.open : ''}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <button className={styles.closeBtn} onClick={handleClose} aria-label="Close modal">
+        <button ref={closeBtnRef} className={styles.closeBtn} onClick={handleClose} aria-label="Close modal">
           ✕
         </button>
 
-        <h2 className={styles.title}>{project.title}</h2>
+        <h2 id="modal-title" className={styles.title}>{project.title}</h2>
         <p className={styles.longDesc}>{project.longDescription}</p>
 
         <div className={styles.techList}>
