@@ -1,0 +1,132 @@
+/* components/Portfolio/Portfolio.module.css */
+
+.portfolio {
+  background: var(--bg);
+  padding: 7rem 4rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px;
+  background: var(--border2);
+  border: 1px solid var(--border2);
+  margin-top: 1rem;
+}
+
+.card {
+  background: var(--bg2);
+  padding: 2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: none;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+  color: inherit;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: var(--stone);
+  transition: height 0.4s ease;
+}
+
+.card:hover {
+  background: var(--surface);
+}
+
+.card:hover::before {
+  height: 100%;
+}
+
+.number {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--moss);
+  margin-bottom: 0.75rem;
+}
+
+.name {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--stone-lt);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  transition: color 0.3s;
+}
+
+.card:hover .name {
+  color: var(--cream);
+}
+
+.desc {
+  font-size: 0.81rem;
+  color: var(--text-dim);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.techList {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.chip {
+  font-size: 0.65rem;
+  padding: 0.18rem 0.5rem;
+  background: var(--bg3);
+  color: var(--moss-lt);
+  border-radius: 2px;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(74, 124, 89, 0.3);
+}
+
+.arrow {
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  transition: color 0.3s;
+  white-space: nowrap;
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+}
+
+.card:hover .arrow {
+  color: var(--stone);
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .portfolio {
+    padding: 5rem 2rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
