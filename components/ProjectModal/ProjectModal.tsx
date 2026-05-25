@@ -13,8 +13,11 @@ type Props = {
 export default function ProjectModal({ project, onClose }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const onCloseRef = useRef(onClose)
-  onCloseRef.current = onClose
   const closeBtnRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    onCloseRef.current = onClose
+  })
 
   useEffect(() => {
     if (!project) return
