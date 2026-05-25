@@ -1,0 +1,223 @@
+/* components/Hero/Hero.module.css */
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, 20px) scale(1.06); }
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 4rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+.blob1 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(61, 107, 74, 0.22), transparent);
+  top: -200px;
+  right: -150px;
+  animation: drift 14s ease-in-out infinite alternate;
+}
+
+.blob2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(42, 92, 58, 0.14), transparent);
+  bottom: 100px;
+  left: -100px;
+  animation: drift 18s ease-in-out infinite alternate-reverse;
+}
+
+.bgText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: clamp(10rem, 18vw, 20rem);
+  font-weight: 300;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(74, 124, 89, 0.08);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.botanical {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 42vw;
+  max-width: 580px;
+  opacity: 0.13;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 4rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--moss);
+  margin-bottom: 2rem;
+}
+
+.tagLine {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--moss);
+}
+
+.h1 {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 7vw, 8rem);
+  font-weight: 300;
+  line-height: 0.95;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+  animation: heroIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.italic {
+  font-style: italic;
+  color: var(--stone);
+}
+
+.indent {
+  padding-left: 3rem;
+  display: block;
+}
+
+.right {
+  padding-bottom: 0.5rem;
+  animation: heroIn 1.2s 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.desc {
+  font-size: 1rem;
+  color: var(--text-dim);
+  line-height: 1.9;
+  margin-bottom: 2.5rem;
+  max-width: 380px;
+}
+
+.stats {
+  display: flex;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.statNum {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1;
+  display: block;
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 0.25rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.btnPrimary {
+  padding: 0.9rem 2.2rem;
+  background: var(--moss-dk);
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  border: 1px solid transparent;
+  transition: background 0.3s, transform 0.2s;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.btnPrimary:hover {
+  background: var(--moss);
+  transform: translateY(-2px);
+}
+
+.btnGhost {
+  padding: 0.9rem 2.2rem;
+  background: transparent;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.btnGhost:hover {
+  border-color: var(--stone);
+  color: var(--stone);
+}
+
+@media (max-width: 1000px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .right {
+    max-width: 500px;
+  }
+
+  .botanical {
+    opacity: 0.07;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    padding: 0 2rem 4rem;
+  }
+}
