@@ -32,6 +32,7 @@ export default function ProjectCarousel({ title, heroImage, images }: Props) {
   useEffect(() => {
     if (!emblaApi) return
     setScrollSnaps(emblaApi.scrollSnapList())
+    setSelectedIndex(emblaApi.selectedScrollSnap())
     emblaApi.on('select', onSelect)
     return () => { emblaApi.off('select', onSelect) }
   }, [emblaApi, onSelect])
