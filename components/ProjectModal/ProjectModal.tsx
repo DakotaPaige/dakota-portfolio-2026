@@ -57,6 +57,8 @@ export default function ProjectModal({ project, onClose }: Props) {
     }, 400)
   }
 
+  const hasMedia = !!(project.heroImage || project.images?.length)
+
   return createPortal(
     <div className={styles.overlay} onClick={handleClose}>
       <div
@@ -81,7 +83,7 @@ export default function ProjectModal({ project, onClose }: Props) {
           images={project.images}
         />
 
-        <div className={styles.body}>
+        <div className={`${styles.body} ${!hasMedia ? styles.bodyStandalone : ''}`}>
           <h2 id="modal-title" className={styles.title}>{project.title}</h2>
           <p className={styles.longDesc}>{project.longDescription}</p>
 

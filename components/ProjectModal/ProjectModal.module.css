@@ -33,6 +33,10 @@
   padding: 2.5rem 3rem 3rem;
 }
 
+.bodyStandalone {
+  padding-top: 4rem;
+}
+
 .closeBtn {
   position: absolute;
   top: 1rem;
@@ -67,7 +71,6 @@
   color: var(--cream);
   line-height: 1.1;
   margin-bottom: 1.5rem;
-  padding-right: 3rem;
 }
 
 .longDesc {
