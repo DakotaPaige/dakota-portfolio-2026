@@ -55,7 +55,7 @@ export default function ProjectCarousel({ title, heroImage, images }: Props) {
                   alt={i === 0 ? title : `${title} — image ${i + 1}`}
                   className={styles.media}
                 />
-              ) : (
+              ) : slide.video ? (
                 <video
                   src={slide.src}
                   className={styles.media}
@@ -64,6 +64,12 @@ export default function ProjectCarousel({ title, heroImage, images }: Props) {
                   loop
                   playsInline
                   aria-hidden="true"
+                />
+              ) : (
+                <img
+                  src={slide.src}
+                  alt={i === 0 ? title : `${title} — image ${i + 1}`}
+                  className={styles.media}
                 />
               )}
             </div>
