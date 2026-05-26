@@ -2,7 +2,9 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import type { Project } from '@/data/projects'
+import ProjectCarousel from './ProjectCarousel'
 import styles from './ProjectModal.module.css'
 
 type Props = {
@@ -55,7 +57,7 @@ export default function ProjectModal({ project, onClose }: Props) {
     }, 400)
   }
 
-  return (
+  return createPortal(
     <div className={styles.overlay} onClick={handleClose}>
       <div
         role="dialog"
@@ -64,44 +66,58 @@ export default function ProjectModal({ project, onClose }: Props) {
         className={`${styles.panel} ${isOpen ? styles.open : ''}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <button ref={closeBtnRef} className={styles.closeBtn} onClick={handleClose} aria-label="Close modal">
+        <button
+          ref={closeBtnRef}
+          className={styles.closeBtn}
+          onClick={handleClose}
+          aria-label="Close modal"
+        >
           ✕
         </button>
 
-        <h2 id="modal-title" className={styles.title}>{project.title}</h2>
-        <p className={styles.longDesc}>{project.longDescription}</p>
+        <ProjectCarousel
+          title={project.title}
+          heroImage={project.heroImage}
+          images={project.images}
+        />
 
-        <div className={styles.techList}>
-          {project.tech.map((t) => (
-            <span key={t} className={styles.techChip}>{t}</span>
-          ))}
-        </div>
+        <div className={styles.body}>
+          <h2 id="modal-title" className={styles.title}>{project.title}</h2>
+          <p className={styles.longDesc}>{project.longDescription}</p>
 
-        {(project.liveUrl || project.githubUrl) && (
-          <div className={styles.actions}>
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${styles.actionLink} ${styles.actionLinkPrimary}`}
-              >
-                ↗ Live site
-              </a>
-            )}
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${styles.actionLink} ${styles.actionLinkGhost}`}
-              >
-                GitHub
-              </a>
-            )}
+          <div className={styles.techList}>
+            {project.tech.map((t) => (
+              <span key={t} className={styles.techChip}>{t}</span>
+            ))}
           </div>
-        )}
+
+          {(project.liveUrl || project.githubUrl) && (
+            <div className={styles.actions}>
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.actionLink} ${styles.actionLinkPrimary}`}
+                >
+                  ↗ Live site
+                </a>
+              )}
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.actionLink} ${styles.actionLinkGhost}`}
+                >
+                  GitHub
+                </a>
+              )}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
