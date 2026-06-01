@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dakota Mauza — Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:         #0d1510;
+    --bg2:        #111a13;
+    --bg3:        #162019;
+    --surface:    #1c2b1e;
+    --surface2:   #243328;
+    --border:     rgba(74, 124, 89, 0.22);
+    --border2:    rgba(74, 124, 89, 0.1);
+    --moss-dk:    #4a7c59;
+    --moss:       #5e9970;
+    --moss-lt:    #7aab8a;
+    --stone:      #a8d5b5;
+    --stone-lt:   #c8e8d4;
+    --cream:      #e8e4d9;
+    --text:       #cdd9c8;
+    --text-dim:   #6b8f75;
+    --warm:       #7aab8a;
+
+    /* Light section palette */
+    --light-bg:      #f4f7f2;
+    --light-bg2:     #eaf0e6;
+    --light-surface: #ffffff;
+    --light-border:  rgba(74, 124, 89, 0.18);
+    --light-text:    #2d4a35;
+    --light-dim:     #6b8f75;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.35;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
+    transition: padding 0.4s, background 0.4s, border-color 0.4s;
+    border-bottom: 1px solid transparent;
+  }
+
+  nav.scrolled {
+    background: rgba(19, 18, 14, 0.92);
+    backdrop-filter: blur(14px);
+    padding: 1.2rem 4rem;
+    border-bottom-color: var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--stone-lt);
+    text-decoration: none;
+  }
+
+  .nav-right { display: flex; align-items: center; gap: 3rem; }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--moss-lt); }
+
+  .nav-hire {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--moss-lt);
+    text-decoration: none;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid rgba(122, 171, 138, 0.35);
+    transition: all 0.3s;
+  }
+
+  .nav-hire:hover {
+    background: rgba(122, 171, 138, 0.08);
+    border-color: var(--moss-lt);
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 4rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Warm gradient blobs */
+  .hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+  }
+
+  .hero-blob-1 {
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(61,107,74,0.22), transparent);
+    top: -200px; right: -150px;
+    animation: drift 14s ease-in-out infinite alternate;
+  }
+
+  .hero-blob-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(42,92,58,0.14), transparent);
+    bottom: 100px; left: -100px;
+    animation: drift 18s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes drift {
+    from { transform: translate(0,0) scale(1); }
+    to { transform: translate(30px, 20px) scale(1.06); }
+  }
+
+  /* Ghost watermark text */
+  .hero-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -52%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(10rem, 18vw, 20rem);
+    font-weight: 300;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(74, 124, 89, 0.08);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  /* Botanical illustration */
+  .botanical {
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 42vw;
+    max-width: 580px;
+    opacity: 0.13;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    gap: 4rem;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 2rem;
+  }
+
+  .hero-tag span {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--moss);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 7vw, 8rem);
+    font-weight: 300;
+    line-height: 0.95;
+    color: var(--cream);
+    letter-spacing: -0.02em;
+    animation: heroIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  h1 .italic { font-style: italic; color: var(--stone); }
+  h1 .indent { padding-left: 3rem; display: block; }
+
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-right {
+    padding-bottom: 0.5rem;
+    animation: heroIn 1.2s 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--text-dim);
+    line-height: 1.9;
+    margin-bottom: 2.5rem;
+    max-width: 380px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
+
+  .btn-primary {
+    padding: 0.9rem 2.2rem;
+    background: var(--moss-dk);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    font-family: 'DM Sans', sans-serif;
+    border: 1px solid transparent;
+    transition: background 0.3s, transform 0.2s;
+    border-radius: 2px;
+  }
+
+  .btn-primary:hover { background: var(--moss); transform: translateY(-2px); }
+
+  .btn-ghost {
+    padding: 0.9rem 2.2rem;
+    background: transparent;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    font-family: 'DM Sans', sans-serif;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+
+  .btn-ghost:hover { border-color: var(--stone); color: var(--stone); }
+
+  /* ─── SHARED ─── */
+  section { position: relative; z-index: 1; }
+
+  .section-header { margin-bottom: 4rem; }
+
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--moss-lt);
+  }
+
+  .section-num.dark { color: var(--moss-dk); }
+
+  .section-line {
+    width: 40px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-line.dark { background: var(--light-border); }
+
+  .section-label-text {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .section-label-text.dark { color: var(--light-dim); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.8rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .section-title.dark { color: var(--light-text); }
+
+  .section-title em { font-style: italic; color: var(--stone); }
+  .section-title.dark em { color: var(--moss-dk); }
+
+  /* ─── SKILLS ─── */
+  #skills {
+    background: var(--light-bg);
+    padding: 7rem 4rem;
+  }
+
+  .skills-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 1rem;
+  }
+
+  .skills-intro {
+    font-size: 1rem;
+    color: var(--light-dim);
+    line-height: 1.95;
+  }
+
+  .skills-intro p + p { margin-top: 1.2rem; }
+  .skills-intro strong { color: var(--light-text); font-weight: 500; }
+
+  .skills-grid { display: flex; flex-direction: column; gap: 1rem; }
+
+  .skill-category {
+    padding: 1.5rem;
+    background: var(--light-surface);
+    border: 1px solid var(--light-border);
+    border-radius: 3px;
+    transition: border-color 0.35s, box-shadow 0.35s;
+  }
+
+  .skill-category:hover {
+    border-color: var(--moss-dk);
+    box-shadow: 0 4px 24px rgba(74,124,89,0.08);
+  }
+
+  .skill-category-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--moss-dk);
+    margin-bottom: 1rem;
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+
+  .skill-tag {
+    padding: 0.28rem 0.7rem;
+    background: var(--light-bg2);
+    color: var(--light-text);
+    font-size: 0.8rem;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    transition: border-color 0.3s, color 0.3s;
+  }
+
+  .skill-tag:hover { border-color: var(--moss-dk); color: var(--moss-dk); }
+
+  /* ─── PORTFOLIO ─── */
+  #portfolio {
+    background: var(--bg);
+    padding: 7rem 4rem;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border2);
+    border: 1px solid var(--border2);
+    margin-top: 1rem;
+  }
+
+  .project-card {
+    background: var(--bg2);
+    padding: 2rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--stone);
+    transition: height 0.4s ease;
+  }
+
+  .project-card:hover { background: var(--surface); }
+  .project-card:hover::before { height: 100%; }
+
+  .project-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--moss);
+    margin-bottom: 0.75rem;
+  }
+
+  .project-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--stone-lt);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+    transition: color 0.3s;
+  }
+
+  .project-card:hover .project-name { color: var(--cream); }
+
+  .project-desc {
+    font-size: 0.81rem;
+    color: var(--text-dim);
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .project-tech { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+
+  .tech-chip {
+    font-size: 0.65rem;
+    padding: 0.18rem 0.5rem;
+    background: var(--bg3);
+    color: var(--moss-lt);
+    border-radius: 2px;
+    letter-spacing: 0.04em;
+    border: 1px solid rgba(74, 124, 89, 0.3);
+  }
+
+  .project-link {
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    text-decoration: none;
+    transition: color 0.3s;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+  }
+
+  .project-link:hover { color: var(--stone); }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: var(--light-bg);
+    padding: 8rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4.5vw, 5rem);
+    font-weight: 300;
+    color: var(--light-text);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .contact-title em { font-style: italic; color: var(--moss-dk); }
+
+  .contact-sub {
+    color: var(--light-dim);
+    font-size: 1rem;
+    max-width: 420px;
+    line-height: 1.85;
+    margin-bottom: 1.5rem;
+  }
+
+  .availability-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--moss-dk);
+    margin-bottom: 2.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(74, 124, 89, 0.3);
+    border-radius: 2px;
+    background: var(--light-surface);
+  }
+
+  .avail-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--moss-dk);
+    animation: pulse 2.2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .contact-email-big {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2.5rem);
+    font-weight: 300;
+    color: var(--light-text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--light-border);
+    padding-bottom: 0.4rem;
+    margin-bottom: 3rem;
+    letter-spacing: -0.01em;
+    transition: color 0.3s, border-color 0.3s;
+  }
+
+  .contact-email-big:hover { color: var(--moss-dk); border-color: var(--moss-dk); }
+
+  .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--light-dim);
+    text-decoration: none;
+    font-size: 0.82rem;
+    padding: 0.7rem 1.4rem;
+    border: 1px solid var(--light-border);
+    border-radius: 2px;
+    letter-spacing: 0.04em;
+    background: var(--light-surface);
+    transition: all 0.3s;
+  }
+
+  .contact-link:hover {
+    color: var(--moss-dk);
+    border-color: var(--moss-dk);
+    background: var(--light-bg2);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem 4rem;
+    background: var(--bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border2);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+
+  footer span:last-child {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  /* ─── REVEAL ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1000px) {
+    .hero-content { grid-template-columns: 1fr; }
+    .hero-right { max-width: 500px; }
+    .botanical { opacity: 0.07; }
+    .skills-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 1.5rem 2rem; }
+    nav.scrolled { padding: 1rem 2rem; }
+    .nav-links, .nav-hire { display: none; }
+    #hero { padding: 0 2rem 4rem; }
+    #skills, #portfolio, #contact { padding: 5rem 2rem; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">D. Mauza</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-hire">Available for hire</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+
+  <div class="hero-bg-text">Frontend</div>
+
+  <!-- Botanical SVG — forest green palette -->
+  <svg class="botanical" viewBox="0 0 500 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M350 700 Q320 500 280 350 Q250 220 300 100" stroke="#4a7c59" stroke-width="1.5" fill="none"/>
+    <path d="M290 380 Q180 320 160 220 Q220 260 280 350Z" fill="#2e4232" opacity="0.9"/>
+    <path d="M275 320 Q380 270 410 170 Q350 210 280 300Z" fill="#3d6b4a" opacity="0.7"/>
+    <path d="M295 460 Q190 430 175 360 Q235 390 295 450Z" fill="#4a7c59" opacity="0.7"/>
+    <path d="M300 200 Q250 150 260 80 Q290 130 305 195Z" fill="#4a7c59" opacity="0.6"/>
+    <path d="M285 250 Q360 220 380 160 Q330 190 285 245Z" fill="#2e4232" opacity="0.7"/>
+    <path d="M270 420 Q210 410 200 380" stroke="#3d6b4a" stroke-width="0.8" fill="none" opacity="0.8"/>
+    <path d="M280 280 Q330 260 340 230" stroke="#3d6b4a" stroke-width="0.8" fill="none" opacity="0.8"/>
+    <!-- Forest green berries -->
+    <circle cx="200" cy="220" r="4.5" fill="#7aab8a" opacity="0.6"/>
+    <circle cx="162" cy="222" r="2.5" fill="#a8d5b5" opacity="0.5"/>
+    <circle cx="410" cy="172" r="4" fill="#7aab8a" opacity="0.55"/>
+    <circle cx="261" cy="82" r="5" fill="#a8d5b5" opacity="0.6"/>
+    <circle cx="175" cy="362" r="3" fill="#7aab8a" opacity="0.5"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-tag"><span></span>Full Stack Developer</div>
+      <h1>
+        Dakota<br>
+        <span class="indent"><span class="italic">Mauza</span></span>
+      </h1>
+    </div>
+
+    <div class="hero-right">
+      <p class="hero-desc">
+        I'm a frontend-focused full stack developer who builds things people actually enjoy using.
+        Thoughtful interfaces, clean code, and a genuine interest in getting the details right.
+      </p>
+      <div class="hero-stats">
+        <div>
+          <span class="stat-num">5+</span>
+          <div class="stat-label">Years building</div>
+        </div>
+        <div>
+          <span class="stat-num">30+</span>
+          <div class="stat-label">Projects shipped</div>
+        </div>
+        <div>
+          <span class="stat-num">∞</span>
+          <div class="stat-label">Coffee consumed</div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn-primary">See my work</a>
+        <a href="#contact" class="btn-ghost">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      <span class="section-num dark">01</span>
+      <span class="section-line dark"></span>
+      <span class="section-label-text dark">Expertise</span>
+    </div>
+    <h2 class="section-title dark">Skills &amp; <em>tools</em></h2>
+  </div>
+
+  <div class="skills-layout">
+    <div class="skills-intro reveal">
+      <p>My home is in the frontend — the part of the stack where design becomes reality and users form their first impressions. I care about every transition, every interaction state, every accessibility detail.</p>
+      <p>That said, I'm comfortable across the full stack and can hold my own on the backend when a project calls for it.</p>
+      <p><strong>I pick up new tools quickly</strong> and I'm always looking to add something useful to the kit.</p>
+    </div>
+
+    <div class="skills-grid reveal">
+      <div class="skill-category">
+        <p class="skill-category-label">Frontend</p>
+        <div class="skill-tags">
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">CSS / Sass</span>
+          <span class="skill-tag">Tailwind</span>
+          <span class="skill-tag">Framer Motion</span>
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">Accessibility</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <p class="skill-category-label">Backend &amp; Data</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Express</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">GraphQL</span>
+          <span class="skill-tag">Firebase</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <p class="skill-category-label">Tools &amp; Workflow</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Vite</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">Vercel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      <span class="section-num">02</span>
+      <span class="section-line"></span>
+      <span class="section-label-text">Selected Work</span>
+    </div>
+    <h2 class="section-title">Things I've <em>built</em></h2>
+  </div>
+
+  <div class="portfolio-grid">
+
+    <a href="#" class="project-card reveal">
+      <div>
+        <p class="project-number">01</p>
+        <h3 class="project-name">Project Canopy</h3>
+        <p class="project-desc">Real-time environmental data dashboard built for performance and clarity at scale.</p>
+      </div>
+      <div class="project-footer">
+        <div class="project-tech">
+          <span class="tech-chip">React</span><span class="tech-chip">D3.js</span><span class="tech-chip">Node</span>
+        </div>
+        <span class="project-link">↗</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card reveal">
+      <div>
+        <p class="project-number">02</p>
+        <h3 class="project-name">Mossy</h3>
+        <p class="project-desc">Habit tracker with a calm, nature-inspired interface designed for gentle consistency.</p>
+      </div>
+      <div class="project-footer">
+        <div class="project-tech">
+          <span class="tech-chip">Next.js</span><span class="tech-chip">Tailwind</span><span class="tech-chip">Prisma</span>
+        </div>
+        <span class="project-link">↗</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card reveal">
+      <div>
+        <p class="project-number">03</p>
+        <h3 class="project-name">Fieldwork</h3>
+        <p class="project-desc">Freelance project management — proposals, invoicing, and client communication in one place.</p>
+      </div>
+      <div class="project-footer">
+        <div class="project-tech">
+          <span class="tech-chip">React</span><span class="tech-chip">Firebase</span><span class="tech-chip">Stripe</span>
+        </div>
+        <span class="project-link">↗</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card reveal">
+      <div>
+        <p class="project-number">04</p>
+        <h3 class="project-name">Shoreline</h3>
+        <p class="project-desc">Headless CMS blog template with dark mode, full-text search, and tag filtering.</p>
+      </div>
+      <div class="project-footer">
+        <div class="project-tech">
+          <span class="tech-chip">Next.js</span><span class="tech-chip">Sanity</span><span class="tech-chip">TypeScript</span>
+        </div>
+        <span class="project-link">↗</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card reveal">
+      <div>
+        <p class="project-number">05</p>
+        <h3 class="project-name">Seedling</h3>
+        <p class="project-desc">SaaS onboarding flow builder with drag-and-drop steps and conditional logic.</p>
+      </div>
+      <div class="project-footer">
+        <div class="project-tech">
+          <span class="tech-chip">React</span><span class="tech-chip">DnD Kit</span><span class="tech-chip">PostgreSQL</span>
+        </div>
+        <span class="project-link">↗</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card reveal">
+      <div>
+        <p class="project-number">06</p>
+        <h3 class="project-name">Root &amp; Branch</h3>
+        <p class="project-desc">Family tree visualization with smooth zoom, search, and shareable snapshot exports.</p>
+      </div>
+      <div class="project-footer">
+        <div class="project-tech">
+          <span class="tech-chip">React</span><span class="tech-chip">D3.js</span><span class="tech-chip">Canvas API</span>
+        </div>
+        <span class="project-link">↗</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card reveal">
+      <div>
+        <p class="project-number">07</p>
+        <h3 class="project-name">Clearwater</h3>
+        <p class="project-desc">E-commerce storefront with advanced filtering and a fully custom checkout experience.</p>
+      </div>
+      <div class="project-footer">
+        <div class="project-tech">
+          <span class="tech-chip">Next.js</span><span class="tech-chip">Shopify</span><span class="tech-chip">GraphQL</span>
+        </div>
+        <span class="project-link">↗</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card reveal">
+      <div>
+        <p class="project-number">08</p>
+        <h3 class="project-name">Timber</h3>
+        <p class="project-desc">Internal component library and design system, fully documented with Storybook.</p>
+      </div>
+      <div class="project-footer">
+        <div class="project-tech">
+          <span class="tech-chip">React</span><span class="tech-chip">Storybook</span><span class="tech-chip">Sass</span>
+        </div>
+        <span class="project-link">↗</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card reveal">
+      <div>
+        <p class="project-number">09</p>
+        <h3 class="project-name">Watershed</h3>
+        <p class="project-desc">Open source CLI for generating typed API clients from OpenAPI specs. 400+ GitHub stars.</p>
+      </div>
+      <div class="project-footer">
+        <div class="project-tech">
+          <span class="tech-chip">Node.js</span><span class="tech-chip">TypeScript</span><span class="tech-chip">OSS</span>
+        </div>
+        <span class="project-link">↗</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card reveal">
+      <div>
+        <p class="project-number">10</p>
+        <h3 class="project-name">Grove</h3>
+        <p class="project-desc">Community platform for urban gardeners with real-time messaging and plant ID.</p>
+      </div>
+      <div class="project-footer">
+        <div class="project-tech">
+          <span class="tech-chip">React</span><span class="tech-chip">Socket.io</span><span class="tech-chip">Express</span>
+        </div>
+        <span class="project-link">↗</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card reveal">
+      <div>
+        <p class="project-number">11</p>
+        <h3 class="project-name">Fern</h3>
+        <p class="project-desc">Markdown editor with live preview, version history, and one-click GitHub Pages publishing.</p>
+      </div>
+      <div class="project-footer">
+        <div class="project-tech">
+          <span class="tech-chip">Electron</span><span class="tech-chip">CodeMirror</span><span class="tech-chip">GitHub API</span>
+        </div>
+        <span class="project-link">↗</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card reveal">
+      <div>
+        <p class="project-number">12</p>
+        <h3 class="project-name">Underbrush</h3>
+        <p class="project-desc">Browser extension for capturing dev notes, snippets, and bookmarks with tag-based search.</p>
+      </div>
+      <div class="project-footer">
+        <div class="project-tech">
+          <span class="tech-chip">Chrome API</span><span class="tech-chip">React</span><span class="tech-chip">IndexedDB</span>
+        </div>
+        <span class="project-link">↗</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal" style="text-align:center; margin-bottom:2rem;">
+    <div class="section-eyebrow" style="justify-content:center;">
+      <span class="section-num dark">03</span>
+      <span class="section-line dark"></span>
+      <span class="section-label-text dark">Get in Touch</span>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <h2 class="contact-title">Got a project in mind?<br>I'd love to <em>hear about it.</em></h2>
+    <p class="contact-sub">Whether it's a full build, a collaboration, or just a question — my inbox is always open. I try to reply within a day or two.</p>
+    <div class="availability-badge">
+      <span class="avail-dot"></span>
+      Available for new projects
+    </div>
+    <a href="mailto:hello@dakotamauza.com" class="contact-email-big">hello@dakotamauza.com</a>
+  </div>
+
+  <div class="contact-links reveal">
+    <a href="https://github.com" class="contact-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      GitHub
+    </a>
+    <a href="https://linkedin.com" class="contact-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <a href="#" class="contact-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Résumé
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: var(--light-bg2); border-top: 1px solid var(--light-border); color: var(--light-dim);">
+  <span>© 2025 Dakota Mauza</span>
+  <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.9rem; color: var(--light-text);">Built with care &amp; curiosity.</span>
+</footer>
+
+<script>
+  // Nav on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = (i % 3 * 0.08) + 's';
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

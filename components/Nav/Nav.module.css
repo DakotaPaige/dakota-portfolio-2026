@@ -72,6 +72,12 @@
   border-color: var(--moss-lt);
 }
 
+@media (max-width: 1000px) {
+  .hire {
+    display: none;
+  }
+}
+
 @media (max-width: 700px) {
   .nav {
     padding: 1.5rem 2rem;

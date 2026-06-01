@@ -14,6 +14,14 @@
   text-align: center;
 }
 
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .title {
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
   font-size: clamp(2.5rem, 4.5vw, 5rem);
@@ -105,6 +113,13 @@
   color: var(--moss-dk);
   border-color: var(--moss-dk);
   background: var(--light-bg2);
+}
+
+/* Inline SVGs (via @svgr/webpack) inherit the link's currentColor, incl. hover */
+.icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
 }
 
 @media (max-width: 700px) {

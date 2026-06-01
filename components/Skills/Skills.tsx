@@ -1,8 +1,32 @@
+'use client'
+
 // components/Skills/Skills.tsx
+import { useEffect, useRef, useState } from 'react'
 import { skillCategories } from '@/data/skills'
 import styles from './Skills.module.css'
 
 export default function Skills() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const categoryRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+
+    categoryRefs.current.forEach((el, i) => {
+      if (!el) return
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveIndex(i)
+        },
+        { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+      )
+      obs.observe(el)
+      observers.push(obs)
+    })
+
+    return () => observers.forEach((obs) => obs.disconnect())
+  }, [])
+
   return (
     <section id="skills" className={styles.skills}>
       <div className="section-header reveal">
@@ -28,14 +52,18 @@ export default function Skills() {
             when a project calls for it.
           </p>
           <p>
-            <strong>I pick up new tools quickly</strong> and I&apos;m always looking to add
+            <strong>I pick up new tools quickly</strong>&nbsp;and I&apos;m always looking to add
             something useful to the kit.
           </p>
         </div>
 
         <div className={`${styles.grid} reveal`}>
-          {skillCategories.map((category) => (
-            <div key={category.label} className={styles.category}>
+          {skillCategories.map((category, i) => (
+            <div
+              key={category.label}
+              ref={(el) => { categoryRefs.current[i] = el }}
+              className={`${styles.category}${activeIndex === i ? ` ${styles.categoryActive}` : ''}`}
+            >
               <p className={styles.categoryLabel}>{category.label}</p>
               <div className={styles.tags}>
                 {category.skills.map((skill) => (

@@ -8,14 +8,14 @@ export type SkillCategory = {
 export const skillCategories: SkillCategory[] = [
   {
     label: 'Frontend',
-    skills: ['React', 'TypeScript', 'Next.js', 'CSS / Sass', 'Tailwind', 'Framer Motion', 'HTML5', 'Accessibility'],
+    skills: ['React', 'TypeScript', 'Next.js', 'CSS / Sass', 'Redux', 'React Native', 'Vue', 'GSAP'],
   },
   {
     label: 'Backend & Data',
-    skills: ['Node.js', 'Express', 'PostgreSQL', 'REST APIs', 'GraphQL', 'Firebase'],
+    skills: ['Node.js', 'Express', 'PostgreSQL', 'GraphQL', 'PHP', 'Python', 'SQL', 'MongoDB'],
   },
   {
     label: 'Tools & Workflow',
-    skills: ['Git', 'Figma', 'Vite', 'Docker', 'CI/CD', 'Vercel'],
+    skills: ['Git', 'Webpack', 'Styled Components', 'WordPress', 'Storybook', 'Electron', 'Apache Cordova'],
   },
 ]

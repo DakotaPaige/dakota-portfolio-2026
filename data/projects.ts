@@ -1,5 +1,7 @@
 // data/projects.ts
 
+export type MediaItem = { src: string; video: boolean }
+
 export type Project = {
   id: number
   title: string
@@ -7,105 +9,203 @@ export type Project = {
   longDescription: string
   tech: string[]
   liveUrl?: string
+  liveUrl2?: string
   githubUrl?: string
-  // imageUrl?: string
+  heroImage?: string
+  images?: Array<string | MediaItem>
+  featured?: boolean
 }
 
 export const projects: Project[] = [
   {
     id: 1,
-    title: 'Project Canopy',
-    description: 'Real-time environmental data dashboard built for performance and clarity at scale.',
+    title: 'Gryphon House',
+    description: 'Multi-platform experience spanning a localized website, sales centre TV app, and iPad remote app.',
     longDescription:
-      'An environmental monitoring dashboard that visualises live sensor data across multiple geographic regions. Built with React and D3.js for fluid chart transitions, with a Node.js backend streaming data via WebSockets.',
-    tech: ['React', 'D3.js', 'Node'],
+      'Gryphon House is a multi-platform application experience built to include a localized website, sales center TV app, and a standalone iPad app which also works as a remote for the sales center application. While the website focuses on seamless animations and stunning visuals, the apps include an integrated sales experience with real-time unit data from an API.',
+    tech: ['React', 'Localized Website', 'TV App', 'iPad App', 'API'],
+    liveUrl: 'https://gryphonhousevancouver.com/',
+    heroImage: '/assets/projects/gryphon/gryphon-house-landing.png',
+    images: [
+      '/assets/projects/gryphon/gryphon-house-home.png',
+      '/assets/projects/gryphon/gryphon-house-menu.png',
+      '/assets/projects/gryphon/gryphon-house-menu-hover.png',
+    ],
+    featured: true,
   },
   {
     id: 2,
-    title: 'Mossy',
-    description: 'Habit tracker with a calm, nature-inspired interface designed for gentle consistency.',
+    title: 'Cedar Creek Touchscreen',
+    description: 'Touchscreen TV app with an interactive floorplan unit selector and sleek animations.',
     longDescription:
-      'A daily habit tracker built with a soft, nature-themed design system. Features streak tracking, custom habit categories, and a weekly calendar view. Prisma powers the data layer on a PostgreSQL database.',
-    tech: ['Next.js', 'Tailwind', 'Prisma'],
+      'Cedar Creek is a Touchscreen TV application built to showcase a new phase of buildings. With a sleek, easy to follow layout, it features an interactive floorplan unit selector, where the user can explore and compare units between various phases. They can also explore the neighbourhood, amenities, and any information that might be needed all while enjoying subtle yet exciting animations.',
+    tech: ['React', 'Touchscreen TV App', 'Animations'],
+    heroImage: '/assets/projects/cedar-creek/cedar-creek-1.png',
+    images: [
+      { src: '/assets/projects/cedar-creek/cedar-creek-walkthrough.mp4', video: true },
+      '/assets/projects/cedar-creek/cedar-creek-2.png',
+      '/assets/projects/cedar-creek/cedar-creek-3.png',
+      '/assets/projects/cedar-creek/cedar-creek-4.png',
+      '/assets/projects/cedar-creek/cedar-creek-5.png',
+    ],
+    featured: true,
   },
   {
     id: 3,
-    title: 'Fieldwork',
-    description: 'Freelance project management — proposals, invoicing, and client communication in one place.',
+    title: 'Combine Cafe',
+    description: 'A one-page website with stunning scroll animations.',
     longDescription:
-      'An all-in-one tool for freelancers covering the full client lifecycle: proposal generation, contract signing, milestone tracking, time logging, and Stripe-powered invoicing. Built on React with Firebase for real-time sync.',
-    tech: ['React', 'Firebase', 'Stripe'],
+      "Combine Cafe's website is a sleek one-page platform, designed to spotlight the cafe with captivating scrolling animations that engage users. Utilizing GSAP, the animations are crafted to be smooth and responsive across all devices, enriching the visitor's experience. This approach not only showcases the cafe's highlights but also immerses users in the brand's essence, ensuring a memorable interaction with Combine Cafe's online presence.",
+    tech: ['React', 'TypeScript', 'GSAP', 'Smooth Transitions'],
+    liveUrl: 'https://combinecafe.ca/',
+    heroImage: '/assets/projects/combine/combine-1.png',
+    images: ['/assets/projects/combine/combine-2.png'],
   },
   {
     id: 4,
-    title: 'Shoreline',
-    description: 'Headless CMS blog template with dark mode, full-text search, and tag filtering.',
+    title: 'Locale',
+    description: 'Bold and bright website and touchscreen app.',
     longDescription:
-      'A production-ready blog starter built on Next.js and Sanity CMS. Ships with dark mode, full-text search powered by Sanity GROQ queries, tag-based filtering, and a custom rich-text renderer.',
-    tech: ['Next.js', 'Sanity', 'TypeScript'],
+      "Locale's vibrant branding inspired a user-friendly website and touchscreen app for the sales centre, featuring a sleek and straightforward design enriched by playful animations, like content fade-ins and button hover effects, to engage users. The site is component-based, showcasing distinctive features such as a custom map on the Location page and seamless gallery animations on the Amenities page via GSAP. Additionally, the Floorplans page offers real-time unit availability, courtesy of an external API, integrated with an intuitive building selection tool.",
+    tech: ['React', 'TypeScript', 'Bold Styling', 'API', 'Touchscreen App'],
+    liveUrl: 'https://localerentals.ca/',
+    heroImage: '/assets/projects/locale/locale-1.png',
+    images: [
+      '/assets/projects/locale/locale-2.png',
+      { src: '/assets/projects/locale/locale-home.mov', video: true },
+      { src: '/assets/projects/locale/locale-gallery.mov', video: true },
+    ],
   },
   {
     id: 5,
-    title: 'Seedling',
-    description: 'SaaS onboarding flow builder with drag-and-drop steps and conditional logic.',
+    title: 'Gardena',
+    description: 'Stunning smooth-scrolling website.',
     longDescription:
-      'A no-code builder for SaaS onboarding flows. Product teams drag in steps, set conditions, and preview flows in real time. The backend stores flow definitions as JSON graphs in PostgreSQL.',
-    tech: ['React', 'DnD Kit', 'PostgreSQL'],
+      "Gardena's website features smooth scrolling animations, providing a visually appealing experience. I led the project alongside a two-member development team, focusing on designing the site's structure and animations using GSAP. We also integrated an external API to keep the floorplan information up-to-date. This practical and straightforward approach ensured the website is not only attractive but also functional.",
+    tech: ['React', 'TypeScript', 'Website', 'GSAP'],
+    liveUrl: 'https://intracorphomes.com/gardena/',
+    heroImage: '/assets/projects/gardena/gardena-1.png',
+    images: ['/assets/projects/gardena/gardena-2.png'],
   },
   {
     id: 6,
-    title: 'Root & Branch',
-    description: 'Family tree visualization with smooth zoom, search, and shareable snapshot exports.',
+    title: '1818 Alberni',
+    description: 'A beautiful website with smooth transitions showcasing a high end building.',
     longDescription:
-      'A collaborative family tree app using D3.js for zoomable tree rendering on an HTML Canvas. Supports search across thousands of nodes, keyboard navigation, and PNG/SVG snapshot exports to share with family.',
-    tech: ['React', 'D3.js', 'Canvas API'],
+      '1818 Alberni is a beautiful website to showcase a high end building in the heart of downtown Vancouver. It features smooth transitions to tie together the collage layout and subtle interactions for the user to enjoy. I also helped to create an iPad and TV app for the sales centre, where the iPad can be used as a standalone app or as a remote to display to the TV app. This is used as a helpful sales tool and a way to create more interaction between the user and the building.',
+    tech: ['React', 'Website', 'iPad & TV App', 'Component Architecture'],
+    liveUrl: 'https://landaglobal.com/1818alberni/',
+    heroImage: '/assets/projects/1818/1818-1.png',
+    images: [
+      '/assets/projects/1818/1818-2.png',
+      '/assets/projects/1818/1818-3.png',
+      '/assets/projects/1818/1818-4.png',
+    ],
   },
   {
     id: 7,
-    title: 'Clearwater',
-    description: 'E-commerce storefront with advanced filtering and a fully custom checkout experience.',
+    title: 'Dorian',
+    description: 'Sleek website to showcase a rental building with exciting interactions and API integration.',
     longDescription:
-      'A Shopify-backed storefront built with Next.js and the Storefront GraphQL API. Features multi-faceted product filtering, cart persistence via localStorage, and a fully custom multi-step checkout without Shopify\'s default UI.',
-    tech: ['Next.js', 'Shopify', 'GraphQL'],
-  },
-  {
-    id: 8,
-    title: 'Timber',
-    description: 'Internal component library and design system, fully documented with Storybook.',
-    longDescription:
-      'A design system built for a product team of eight. Includes 40+ components built in React and Sass, documented in Storybook with live playground examples, accessibility annotations, and automated visual regression tests.',
-    tech: ['React', 'Storybook', 'Sass'],
+      'Dorian is a polished multi-page website built with a component-based architecture. Shared components like the menu header, testimonials section, floorplans page, and neighbourhood map give the site a cohesive feel throughout. The floorplans page pulls real-time unit availability from an external API, integrated with an intuitive building selection tool.',
+    tech: ['React', 'Website', 'Component Architecture', 'API'],
+    liveUrl: 'https://www.dorianseattle.com/',
+    heroImage: '/assets/projects/dorian/dorian-1.png',
+    images: [
+      '/assets/projects/dorian/dorian-2.png',
+      '/assets/projects/dorian/dorian-3.png',
+    ],
   },
   {
     id: 9,
-    title: 'Watershed',
-    description: 'Open source CLI for generating typed API clients from OpenAPI specs. 400+ GitHub stars.',
+    title: 'Kutak Design Configurator',
+    description: 'A seamless, unique sales experience to design your dream unit.',
     longDescription:
-      'A Node.js CLI that reads OpenAPI 3.x specs and outputs fully-typed TypeScript clients. Supports plugins for custom output templates. Published to npm and maintained as open source with 400+ GitHub stars.',
-    tech: ['Node.js', 'TypeScript', 'OSS'],
+      'The Kutak design configurator is built to provide users with a seamless sales experience. Users can configure and design their dream unit, preview, print and save the data, and receive a customized email allowing them to register further or link back to their unique chosen settings.',
+    tech: ['React', 'Website', 'Design Configurator', 'PHP'],
+    liveUrl: 'https://kutakdevelopment.com/design/',
+    heroImage: '/assets/projects/kutak/kutak-landing.png',
+    images: [
+      '/assets/projects/kutak/kutak-2.png',
+      '/assets/projects/kutak/kutak-3.png',
+      '/assets/projects/kutak/kutak-4.png',
+    ],
   },
   {
     id: 10,
-    title: 'Grove',
-    description: 'Community platform for urban gardeners with real-time messaging and plant ID.',
+    title: 'Gryphon Living Royal Curator',
+    description: 'A short multi-page site with stunning visuals and animations.',
     longDescription:
-      'A community app for urban gardeners featuring posts, plant identification via an image API, neighbourhood maps, and real-time direct messaging via Socket.io. Built with React and an Express REST API.',
-    tech: ['React', 'Socket.io', 'Express'],
+      'The Gryphon Royal Curator is built as a subsite to provide customers with an easily accessible personalized home experience. It features multiple SVG and scrolling animations, and an elevated responsive design.',
+    tech: ['React', 'TypeScript', 'Website', 'SVG Animations'],
+    liveUrl: 'https://gryphonliving.com/royalcurator',
+    heroImage: '/assets/projects/gryphon/royalcurator1.png',
+    images: [
+      '/assets/projects/gryphon/royalcurator2.png',
+      '/assets/projects/gryphon/royalcurator3.png',
+      '/assets/projects/gryphon/royalcurator4.png',
+    ],
   },
   {
     id: 11,
-    title: 'Fern',
-    description: 'Markdown editor with live preview, version history, and one-click GitHub Pages publishing.',
+    title: 'Raphael',
+    description: 'High end touchscreen application with smooth transitions.',
     longDescription:
-      'A desktop Markdown editor built with Electron and CodeMirror. Features split-pane live preview, local version history stored in SQLite, and a one-click publish flow that pushes to a GitHub Pages repo via the GitHub REST API.',
-    tech: ['Electron', 'CodeMirror', 'GitHub API'],
+      'Raphael is a high end touchscreen application designed to sell luxury low-rise condos. It features a unit floorplan selection experience, custom interactive google map, and custom gallery all tied together with smooth transitions.',
+    tech: ['React', 'Touchscreen App'],
+    heroImage: '/assets/projects/raphael/raphael-landing.png',
+    images: [
+      '/assets/projects/raphael/raphael-2.png',
+      '/assets/projects/raphael/raphael-3.png',
+      '/assets/projects/raphael/raphael-4.png',
+      '/assets/projects/raphael/raphael-5.png',
+    ],
   },
   {
     id: 12,
-    title: 'Underbrush',
-    description: 'Browser extension for capturing dev notes, snippets, and bookmarks with tag-based search.',
+    title: 'Smith & Farrow',
+    description: 'Multi-page website with smooth transitions.',
     longDescription:
-      'A Chrome extension for developers to capture notes, code snippets, and bookmarks while browsing. Data is stored in IndexedDB for offline access and synced across devices via Chrome\'s storage sync API. Built with React.',
-    tech: ['Chrome API', 'React', 'IndexedDB'],
+      'Smith and Farrow is a multipage website with sleek animations and a unique design. It was built in multiple phases, to ultimately include the building, community and neighbourhood information in a clear and modern way.',
+    tech: ['React', 'Website'],
+    liveUrl: 'https://boffo.ca/smithandfarrow/',
+    heroImage: '/assets/projects/smithandfarrow/smithandfarrow_landing.png',
+    images: [
+      '/assets/projects/smithandfarrow/smithandfarrow2.png',
+      '/assets/projects/smithandfarrow/smithandfarrow3.png',
+    ],
+  },
+  {
+    id: 13,
+    title: 'Highpoint',
+    description: 'Touchscreen and iPad application to showcase multiple residential towers.',
+    longDescription:
+      'Highpoint was built as both a touchscreen application and iPad app to be used to promote sales in their presentation centre. It features floorplan selections, interactive views to experience, a neighbourhood map to explore and more.',
+    tech: ['React', 'Touchscreen App', 'iPad App', 'Interactive Map'],
+    heroImage: '/assets/projects/highpoint/highpoint-menu.png',
+    images: [
+      '/assets/projects/highpoint/highpoint-2.png',
+      '/assets/projects/highpoint/highpoint-3.png',
+      '/assets/projects/highpoint/highpoint-4.png',
+      '/assets/projects/highpoint/highpoint-5.png',
+      '/assets/projects/highpoint/highpoint-6.png',
+    ],
+  },
+  {
+    id: 14,
+    title: 'Arbutus',
+    description: 'Stunning website showcasing a new building by the Arbutus greenway.',
+    longDescription:
+      "The Arbutus is a gorgeous multipage website showcasing a new building next to the Arbutus greenway. It's smooth animations and natural graphics lend to its calming feeling, while featuring multiple interactive elements to keep the user clicking through the site to find more.",
+    tech: ['React', 'Website', 'Smooth Animations'],
+    liveUrl: 'https://thearbutus.com/',
+    heroImage: '/assets/projects/arbutus/arbutus-landing.png',
+    images: [
+      '/assets/projects/arbutus/arbutus-2.png',
+      '/assets/projects/arbutus/arbutus-3.png',
+      '/assets/projects/arbutus/arbutus-4.png',
+      '/assets/projects/arbutus/arbutus-5.png',
+      '/assets/projects/arbutus/arbutus-6.png',
+    ],
   },
 ]

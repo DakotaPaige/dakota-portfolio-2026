@@ -77,6 +77,7 @@ export default function ProjectModal({ project, onClose }: Props) {
           ✕
         </button>
 
+        <div className={styles.scrollBody}>
         <ProjectCarousel
           title={project.title}
           heroImage={project.heroImage}
@@ -117,6 +118,7 @@ export default function ProjectModal({ project, onClose }: Props) {
               )}
             </div>
           )}
+        </div>
         </div>
       </div>
     </div>,

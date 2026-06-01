@@ -20,7 +20,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Dakota Mauza — Frontend Developer',
+  title: 'Dakota Mauza-Simeone — Frontend Developer',
   description:
     'Frontend-focused full stack developer building thoughtful interfaces and clean code.',
 }

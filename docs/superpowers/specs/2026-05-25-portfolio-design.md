@@ -193,10 +193,10 @@ Three categories:
 
 ### Footer.tsx (server)
 
-- Dark `--bg` background, border-top `--border2`
+- Light `--light-bg2` background, border-top `--light-border`, text `--light-dim`
 - Flex row, space-between
 - Left: "© 2025 Dakota Mauza"
-- Right: "Built with care & curiosity." (Cormorant Garamond italic)
+- Right: "Built with care & curiosity." (Cormorant Garamond italic, `--light-text` colour)
 - Column layout below 700px
 
 ### ScrollRevealInit.tsx (`"use client"`)
@@ -222,8 +222,11 @@ import { useEffect } from 'react'
 export default function useScrollReveal() {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible')
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          ;(entry.target as HTMLElement).style.transitionDelay = (i % 3 * 0.08) + 's'
+          entry.target.classList.add('visible')
+        }
       })
     }, { threshold: 0.08 })
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
@@ -231,6 +234,8 @@ export default function useScrollReveal() {
   }, [])
 }
 ```
+
+Stagger delay matches reference.html: each entry's `transitionDelay` is `(i % 3 * 0.08)s`.
 
 ---
 

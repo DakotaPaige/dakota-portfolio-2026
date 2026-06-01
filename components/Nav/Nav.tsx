@@ -16,7 +16,7 @@ export default function Nav() {
 
   return (
     <nav ref={navRef} className={styles.nav} aria-label="Main navigation">
-      <a href="#hero" className={styles.logo}>D. Mauza</a>
+      <a href="#hero" className={styles.logo}>D. Mauza-Simeone</a>
       <div className={styles.navRight}>
         <ul className={styles.navLinks}>
           <li><a href="#skills">Skills</a></li>

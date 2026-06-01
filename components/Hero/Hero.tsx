@@ -41,7 +41,7 @@ export default function Hero() {
             Dakota
             <br />
             <span className={styles.indent}>
-              <span className={styles.italic}>Mauza</span>
+              <span className={styles.italic}>Mauza-Simeone</span>
             </span>
           </h1>
         </div>
@@ -54,11 +54,11 @@ export default function Hero() {
           </p>
           <div className={styles.stats}>
             <div>
-              <span className={styles.statNum}>5+</span>
+              <span className={styles.statNum}>8+</span>
               <div className={styles.statLabel}>Years building</div>
             </div>
             <div>
-              <span className={styles.statNum}>30+</span>
+              <span className={styles.statNum}>50+</span>
               <div className={styles.statLabel}>Projects shipped</div>
             </div>
             <div>
