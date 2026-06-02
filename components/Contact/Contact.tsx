@@ -39,7 +39,7 @@ export default function Contact() {
           <GithubIcon className={styles.icon} aria-hidden="true" />
           GitHub
         </a>
-        <a href="https://linkedin.com/in/dakota-mauza-simeone-191384152" target="_blank" rel="noopener noreferrer" className={styles.link}>
+        <a href="https://www.linkedin.com/in/dakota-mauza-simeone/" target="_blank" rel="noopener noreferrer" className={styles.link}>
           <LinkedinIcon className={styles.icon} aria-hidden="true" />
           LinkedIn
         </a>

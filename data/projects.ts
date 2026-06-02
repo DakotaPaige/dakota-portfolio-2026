@@ -11,7 +11,6 @@ export type Project = {
   liveUrl2?: string
   githubUrl?: string
   images?: Array<string | MediaItem>
-  featured?: boolean
 }
 
 export const projects: Project[] = [
@@ -29,7 +28,6 @@ export const projects: Project[] = [
       '/assets/projects/landmark-district/landmark-district-4.png',
       '/assets/projects/landmark-district/landmark-district-5.png',
     ],
-    featured: true,
   },
   {
     title: 'The Amazing Brentwood - Tower Six',
@@ -45,7 +43,34 @@ export const projects: Project[] = [
       '/assets/projects/tab/tab-3.png',
       '/assets/projects/tab/tab-4.png',
     ],
-    featured: true,
+  },
+   {
+    title: 'Warrington Residential',
+    description: 'A smooth website with headless wordpress and API integration to showcase multiple properties.',
+    longDescription:
+      'Warrington Residential is a pristine React and TypeScript build that showcases multiple properties, with much of its content populated from a headless WordPress backend so editors can manage the site while it renders through a fast, custom front end. Real-time unit availability is pulled in from an external API, keeping listings accurate without manual updates. Throughout, smooth GSAP animations create a polished, considered flow that carries the user effortlessly from one property to the next.',
+    tech: ['React', 'Typescript', 'GSAP', 'Headless Wordpress', 'API'],
+    liveUrl: 'https://warringtonresidential.com/',
+    images: [
+      '/assets/projects/warrington/warrington-1.png',
+      '/assets/projects/warrington/warrington-2.png',
+      '/assets/projects/warrington/warrington-3.png',
+      '/assets/projects/warrington/warrington-4.png',
+      '/assets/projects/warrington/warrington-5.png',
+    ],
+  },
+  {
+    title: 'Maplewood',
+    description: 'A one-page website with fun animations and visuals to showcase a new build on the North Shore.',
+    longDescription:
+      'Maplewood is a vibrant one-page website designed to showcase a new residential build on the North Shore. With a focus on engaging animations and a bold design, the site provides an immersive experience using impactful animations.',
+    tech: ['React', 'Typescript', 'GSAP', 'One-Page Website'],
+    liveUrl: 'https://welcometomaplewood.ca/',
+    images: [
+      '/assets/projects/maplewood/maplewood-1.png',
+       { src: '/assets/projects/maplewood/maplewood-home-video-compressed.mp4', video: true },
+       '/assets/projects/maplewood/maplewood-2.png',
+    ],
   },
   {
     title: 'Gryphon House',
@@ -60,7 +85,6 @@ export const projects: Project[] = [
       '/assets/projects/gryphon/gryphon-house-menu.png',
       '/assets/projects/gryphon/gryphon-house-menu-hover.png',
     ],
-    featured: true,
   },
   {
     title: 'Cedar Creek Touchscreen',
@@ -76,7 +100,6 @@ export const projects: Project[] = [
       '/assets/projects/cedar-creek/cedar-creek-4.png',
       '/assets/projects/cedar-creek/cedar-creek-5.png',
     ],
-    featured: true,
   },
   {
     title: 'Combine Cafe',
