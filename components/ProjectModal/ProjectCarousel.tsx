@@ -2,6 +2,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import type { MediaItem } from '@/data/projects'
 import styles from './ProjectCarousel.module.css'
@@ -10,15 +11,11 @@ type Slide = string | MediaItem
 
 type Props = {
   title: string
-  heroImage?: string
   images?: Array<string | MediaItem>
 }
 
-export default function ProjectCarousel({ title, heroImage, images }: Props) {
-  const slides: Slide[] = [
-    ...(heroImage ? [heroImage] : []),
-    ...(images ?? []),
-  ]
+export default function ProjectCarousel({ title, images }: Props) {
+  const slides: Slide[] = images ?? []
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -51,9 +48,12 @@ export default function ProjectCarousel({ title, heroImage, images }: Props) {
           {slides.map((slide, i) => (
             <div key={i} className={styles.slide}>
               {typeof slide === 'string' ? (
-                <img
+                <Image
                   src={slide}
                   alt={i === 0 ? title : `${title} — image ${i + 1}`}
+                  fill
+                  sizes="(max-width: 760px) 100vw, 760px"
+                  loading={i === 0 ? 'eager' : 'lazy'}
                   className={styles.media}
                 />
               ) : slide.video ? (
@@ -67,9 +67,12 @@ export default function ProjectCarousel({ title, heroImage, images }: Props) {
                   aria-hidden="true"
                 />
               ) : (
-                <img
+                <Image
                   src={slide.src}
                   alt={i === 0 ? title : `${title} — image ${i + 1}`}
+                  fill
+                  sizes="(max-width: 760px) 100vw, 760px"
+                  loading={i === 0 ? 'eager' : 'lazy'}
                   className={styles.media}
                 />
               )}

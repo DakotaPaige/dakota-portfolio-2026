@@ -24,14 +24,14 @@ export default function Portfolio() {
       </div>
 
       <div className={styles.grid}>
-        {projects.map((project) => (
+        {projects.map((project, index) => (
           <button
-            key={project.id}
+            key={project.title}
             className={`${styles.card} reveal`}
             onClick={() => setSelectedProject(project)}
           >
             <div>
-              <p className={styles.number}>{String(project.id).padStart(2, '0')}</p>
+              <p className={styles.number}>{String(index + 1).padStart(2, '0')}</p>
               <h3 className={styles.name}>{project.title}</h3>
               <p className={styles.desc}>{project.description}</p>
             </div>

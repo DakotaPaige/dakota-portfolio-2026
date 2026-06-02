@@ -57,7 +57,7 @@ export default function ProjectModal({ project, onClose }: Props) {
     }, 400)
   }
 
-  const hasMedia = !!(project.heroImage || project.images?.length)
+  const hasMedia = !!project.images?.length
 
   return createPortal(
     <div className={styles.overlay} onClick={handleClose}>
@@ -80,7 +80,6 @@ export default function ProjectModal({ project, onClose }: Props) {
         <div className={styles.scrollBody}>
         <ProjectCarousel
           title={project.title}
-          heroImage={project.heroImage}
           images={project.images}
         />
 
