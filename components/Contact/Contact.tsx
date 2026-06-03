@@ -43,9 +43,9 @@ export default function Contact() {
           <LinkedinIcon className={styles.icon} aria-hidden="true" />
           LinkedIn
         </a>
-        <a href="/assets/pdf/Resume.pdf" target="_blank" rel="noopener noreferrer" className={styles.link}>
+        <a href="/assets/pdf/DakotaMauzaSimeone-Resume.pdf" target="_blank" rel="noopener noreferrer" className={styles.link}>
           <ResumeIcon className={styles.icon} aria-hidden="true" />
-          Résumé
+          Resume
         </a>
       </div>
     </section>
